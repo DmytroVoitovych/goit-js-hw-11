@@ -14,7 +14,7 @@ let page = 1;
 let response = null; 
 
 const getValue = (e) => {
-  return optionUrl = {
+   optionUrl = {
     key: '28460134-7b12f16a69bff4fc5524ed994',
     findTermin: searchInput.value.trim(),
     imgType: 'photo',
@@ -22,6 +22,8 @@ const getValue = (e) => {
     ageFilterDate: true,
     pagePer: 40,
   }
+
+  return optionUrl;
 };
 
 const moveScrolle = () => {  
