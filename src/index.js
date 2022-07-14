@@ -12,6 +12,7 @@ const gallery = document.querySelector(".gallery");
 
 let page = 1;
 let response = null; 
+let val = null;
 
 const optionUrl = {
     key: '28460134-7b12f16a69bff4fc5524ed994',
@@ -101,20 +102,20 @@ return `<div class="grid-item" ><a  class="gallery__link" href="${largeImageURL}
     
 };
 
-
+searchInput.addEventListener('input', () => val = searchInput.value.trim());
 
 async function getUser() {
     try {
     //  getValue();  
     
-     response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${searchInput.value.trim()}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
+     response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${val}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
        console.log(searchInput.value.trim()); 
       const render = await renderImg(response.data.hits);
                   if (gallery.children.length == response.data.totalHits) {
                  Notify.info(`We're sorry, but you've reached the end of search results.`);
                  window.removeEventListener('scroll', moveScrolle);
                   }
-                  else if (gallery.children.length > 0) {
+                  else if (gallery.children.length < 40) {
             Notify.info(`Hooray! We found ${response.data.totalHits} images.`);        
       }
          else if (response.data.total === 0 ) {
