@@ -13,17 +13,7 @@ const gallery = document.querySelector(".gallery");
 let page = 1;
 let response = null; 
 
-const optionUrl = {
-    key: '28460134-7b12f16a69bff4fc5524ed994',
-    findTermin: searchInput.value.trim(),
-    imgType: 'photo',
-    orientation: 'horisontal',
-    ageFilterDate: true,
-    pagePer: 40,
-  }
-
-// const getValue = (e) => {
-//    optionUrl = {
+// const optionUrl = {
 //     key: '28460134-7b12f16a69bff4fc5524ed994',
 //     findTermin: searchInput.value.trim(),
 //     imgType: 'photo',
@@ -32,8 +22,18 @@ const optionUrl = {
 //     pagePer: 40,
 //   }
 
-//   return optionUrl;
-// };
+const getValue = (e) => {
+   optionUrl = {
+    key: '28460134-7b12f16a69bff4fc5524ed994',
+    findTermin: searchInput.value.trim(),
+    imgType: 'photo',
+    orientation: 'horisontal',
+    ageFilterDate: true,
+    pagePer: 40,
+  }
+
+  return optionUrl;
+};
 
 const moveScrolle = () => {  
         const d = document.documentElement.getBoundingClientRect();
@@ -51,7 +51,7 @@ window.scrollBy({
 });
     }
 };
-
+const info = ()=> Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
 var lightbox = new SimpleLightbox('.gallery__link', { captionDelay: 250, captionClass: 'test' });   
 
 form.addEventListener('submit',  (e) => {
@@ -61,10 +61,12 @@ form.addEventListener('submit',  (e) => {
     page = 1;
  if (gallery.children.length < 40) {
        getUser();
-      // Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+   info();
      
       } 
 });
+
+
 
 const renderImg = (findedImg) => {
 const imgGallery = findedImg.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads}) => {
@@ -103,17 +105,17 @@ return `<div class="grid-item" ><a  class="gallery__link" href="${largeImageURL}
 
 async function getUser() {
     try {
-    // const val = await getValue();  
+     getValue();  
     
      response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${optionUrl.findTermin}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
         
-        const render = await renderImg(response.data.hits);
-            if (gallery.children.length == response.data.totalHits) {
+      const render = await renderImg(response.data.hits);
+                  if (gallery.children.length == response.data.totalHits) {
                  Notify.info(`We're sorry, but you've reached the end of search results.`);
                  window.removeEventListener('scroll', moveScrolle);
              }
          else if (response.data.total === 0 ) {
-           throw Error ('Sorry, there are no images matching your search query. Please try again.');
+           throw ('Sorry, there are no images matching your search query. Please try again.');
         }
           
         console.log(response);
