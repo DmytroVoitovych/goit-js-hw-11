@@ -14,15 +14,15 @@ let page = 1;
 let response = null; 
 
 const getValue = (e) => {
-    return optionUrl = {
-        key: '28460134-7b12f16a69bff4fc5524ed994',
-        findTermin: searchInput.value.trim(),
-        imgType: 'photo',
-        orientation: 'horisontal',
-        ageFilterDate: true,
-        pagePer: 40,
-    }
-}
+  return optionUrl = {
+    key: '28460134-7b12f16a69bff4fc5524ed994',
+    findTermin: searchInput.value.trim(),
+    imgType: 'photo',
+    orientation: 'horisontal',
+    ageFilterDate: true,
+    pagePer: 40,
+  }
+};
 
 const moveScrolle = () => {  
         const d = document.documentElement.getBoundingClientRect();
@@ -110,7 +110,7 @@ async function getUser() {
         
         Notify.failure(`${error}`);
   }
-}
+};
 
 //
 
