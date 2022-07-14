@@ -4,7 +4,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from "simplelightbox";
 // Дополнительный импорт стилей
 import "simplelightbox/dist/simple-lightbox.min.css";
-
+var throttle = require('lodash.throttle');
 
 const form = document.querySelector('#search-form');
 const searchInput = document.querySelector('[name="searchQuery"]');
@@ -23,22 +23,22 @@ const optionUrl = {
     pagePer: 40,
   }
 
-const moveScrolle = () => {  
-        const d = document.documentElement.getBoundingClientRect();
-        if (d.bottom < document.documentElement.clientHeight + 450) {
-            console.log('done');
-            page++;
-            getUser(); 
-            const { height: cardHeight } = document
-  .querySelector(".photo-card")
-  .firstElementChild.getBoundingClientRect();
+const moveScrolle = throttle(() => {
+  const d = document.documentElement.getBoundingClientRect();
+  if (d.bottom < document.documentElement.clientHeight + 450) {
+    console.log('done');
+    page++;
+    getUser();
+    const { height: cardHeight } = document
+      .querySelector(".photo-card")
+      .firstElementChild.getBoundingClientRect();
 
-window.scrollBy({
-  top: cardHeight * 2,
-  behavior: "smooth",
-});
-    }
-};
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: "smooth",
+    });
+  }
+}, 300);
 
 var lightbox = new SimpleLightbox('.gallery__link', { captionDelay: 250, captionClass: 'test' });   
 
@@ -97,7 +97,7 @@ async function getUser() {
      response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${val}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
        console.log(searchInput.value.trim()); 
       const render = await renderImg(response.data.hits);
-                  if (gallery.children.length == response.data.totalHits) {
+                  if (gallery.children.length >= response.data.totalHits) {
                  Notify.info(`We're sorry, but you've reached the end of search results.`);
                  window.removeEventListener('scroll', moveScrolle);
                   }
