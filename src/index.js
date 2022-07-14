@@ -50,7 +50,7 @@ form.addEventListener('submit', async (e) => {
     page = 1;
  if (gallery.children.length < 40) {
         await getUser();
-    //  await Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+     await Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
      
       } 
 });
@@ -102,7 +102,7 @@ async function getUser() {
                  window.removeEventListener('scroll', moveScrolle);
              }
          else if (response.data.total === 0 ) {
-           throw ('Sorry, there are no images matching your search query. Please try again.');
+           throw Error ('Sorry, there are no images matching your search query. Please try again.');
         }
           
         console.log(response);
