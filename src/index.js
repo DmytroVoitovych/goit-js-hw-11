@@ -13,8 +13,7 @@ const gallery = document.querySelector(".gallery");
 let page = 1;
 let response = null; 
 
-const getValue = (e) => {
-   optionUrl = {
+optionUrl = {
     key: '28460134-7b12f16a69bff4fc5524ed994',
     findTermin: searchInput.value.trim(),
     imgType: 'photo',
@@ -23,8 +22,18 @@ const getValue = (e) => {
     pagePer: 40,
   }
 
-  return optionUrl;
-};
+// const getValue = (e) => {
+//    optionUrl = {
+//     key: '28460134-7b12f16a69bff4fc5524ed994',
+//     findTermin: searchInput.value.trim(),
+//     imgType: 'photo',
+//     orientation: 'horisontal',
+//     ageFilterDate: true,
+//     pagePer: 40,
+//   }
+
+//   return optionUrl;
+// };
 
 const moveScrolle = () => {  
         const d = document.documentElement.getBoundingClientRect();
@@ -52,7 +61,7 @@ form.addEventListener('submit',  (e) => {
     page = 1;
  if (gallery.children.length < 40) {
        getUser();
-      Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+      // Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
      
       } 
 });
@@ -94,7 +103,7 @@ return `<div class="grid-item" ><a  class="gallery__link" href="${largeImageURL}
 
 async function getUser() {
     try {
-    const val = await getValue();  
+    // const val = await getValue();  
     
      response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${optionUrl.findTermin}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
         
