@@ -45,14 +45,14 @@ window.scrollBy({
 
 var lightbox = new SimpleLightbox('.gallery__link', { captionDelay: 250, captionClass: 'test' });   
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener('submit',  (e) => {
     window.addEventListener('scroll', moveScrolle);
     e.preventDefault();
     gallery.innerHTML = '';
     page = 1;
  if (gallery.children.length < 40) {
-        await getUser();
-     await Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+       getUser();
+      Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
      
       } 
 });
