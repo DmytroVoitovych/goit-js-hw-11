@@ -23,19 +23,6 @@ const optionUrl = {
     pagePer: 40,
   }
 
-// const getValue = (e) => {
-//    optionUrl = {
-//     key: '28460134-7b12f16a69bff4fc5524ed994',
-//     findTermin: searchInput.value.trim(),
-//     imgType: 'photo',
-//     orientation: 'horisontal',
-//     ageFilterDate: true,
-//     pagePer: 40,
-//   }
-
-//   return optionUrl;
-// };
-
 const moveScrolle = () => {  
         const d = document.documentElement.getBoundingClientRect();
         if (d.bottom < document.documentElement.clientHeight + 450) {
@@ -52,17 +39,17 @@ window.scrollBy({
 });
     }
 };
-// const info = ()=> Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+
 var lightbox = new SimpleLightbox('.gallery__link', { captionDelay: 250, captionClass: 'test' });   
 
 form.addEventListener('submit',  (e) => {
-    window.addEventListener('scroll', moveScrolle, {once:true});
+    window.addEventListener('scroll', moveScrolle);
     e.preventDefault();
     gallery.innerHTML = '';
     page = 1;
  if (gallery.children.length < 40) {
        getUser();
-  //  info();
+  
      
       } 
 });
@@ -130,7 +117,18 @@ async function getUser() {
 
 //
 
+// const getValue = (e) => {
+//    optionUrl = {
+//     key: '28460134-7b12f16a69bff4fc5524ed994',
+//     findTermin: searchInput.value.trim(),
+//     imgType: 'photo',
+//     orientation: 'horisontal',
+//     ageFilterDate: true,
+//     pagePer: 40,
+//   }
 
+//   return optionUrl;
+// };
 
 
   
