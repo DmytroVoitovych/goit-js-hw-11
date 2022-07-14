@@ -51,7 +51,7 @@ window.scrollBy({
 });
     }
 };
-const info = ()=> Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+// const info = ()=> Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
 var lightbox = new SimpleLightbox('.gallery__link', { captionDelay: 250, captionClass: 'test' });   
 
 form.addEventListener('submit',  (e) => {
@@ -61,7 +61,7 @@ form.addEventListener('submit',  (e) => {
     page = 1;
  if (gallery.children.length < 40) {
        getUser();
-   info();
+  //  info();
      
       } 
 });
@@ -105,7 +105,7 @@ return `<div class="grid-item" ><a  class="gallery__link" href="${largeImageURL}
 
 async function getUser() {
     try {
-     getValue();  
+    //  getValue();  
     
      response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${optionUrl.findTermin}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
         
@@ -113,7 +113,10 @@ async function getUser() {
                   if (gallery.children.length == response.data.totalHits) {
                  Notify.info(`We're sorry, but you've reached the end of search results.`);
                  window.removeEventListener('scroll', moveScrolle);
-             }
+                  }
+                  else if (gallery.children.length > 0) {
+            Notify.info(`Hooray! We found ${response.data.totalHits} images.`);        
+      }
          else if (response.data.total === 0 ) {
            throw ('Sorry, there are no images matching your search query. Please try again.');
         }
