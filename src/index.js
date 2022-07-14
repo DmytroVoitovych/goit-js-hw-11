@@ -56,7 +56,7 @@ window.scrollBy({
 var lightbox = new SimpleLightbox('.gallery__link', { captionDelay: 250, captionClass: 'test' });   
 
 form.addEventListener('submit',  (e) => {
-    window.addEventListener('scroll', moveScrolle);
+    window.addEventListener('scroll', moveScrolle, {once:true});
     e.preventDefault();
     gallery.innerHTML = '';
     page = 1;
@@ -106,8 +106,7 @@ searchInput.addEventListener('input', () => val = searchInput.value.trim());
 
 async function getUser() {
     try {
-    //  getValue();  
-    
+     
      response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${val}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
        console.log(searchInput.value.trim()); 
       const render = await renderImg(response.data.hits);
@@ -115,7 +114,7 @@ async function getUser() {
                  Notify.info(`We're sorry, but you've reached the end of search results.`);
                  window.removeEventListener('scroll', moveScrolle);
                   }
-                  else if (gallery.children.length < 40) {
+                  else if (gallery.children.length <= 40) {
             Notify.info(`Hooray! We found ${response.data.totalHits} images.`);        
       }
          else if (response.data.total === 0 ) {
