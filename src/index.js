@@ -107,8 +107,8 @@ async function getUser() {
     try {
     //  getValue();  
     
-     response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${optionUrl.findTermin}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
-        
+     response = await axios.get(`https://pixabay.com/api/?key=${optionUrl.key}&q=${searchInput.value.trim()}&image_type=${optionUrl.imgType}&orientation=${optionUrl.orientation}&safesearch=${optionUrl.ageFilterDate}&per_page=${optionUrl.pagePer}&page=${page}`);
+       console.log(searchInput.value.trim()); 
       const render = await renderImg(response.data.hits);
                   if (gallery.children.length == response.data.totalHits) {
                  Notify.info(`We're sorry, but you've reached the end of search results.`);
