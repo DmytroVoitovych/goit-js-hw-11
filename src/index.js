@@ -13,17 +13,7 @@ const gallery = document.querySelector(".gallery");
 let page = 1;
 let response = null; 
 
-// const optionUrl = {
-//     key: '28460134-7b12f16a69bff4fc5524ed994',
-//     findTermin: searchInput.value.trim(),
-//     imgType: 'photo',
-//     orientation: 'horisontal',
-//     ageFilterDate: true,
-//     pagePer: 40,
-//   }
-
-const getValue = (e) => {
-   optionUrl = {
+const optionUrl = {
     key: '28460134-7b12f16a69bff4fc5524ed994',
     findTermin: searchInput.value.trim(),
     imgType: 'photo',
@@ -32,8 +22,18 @@ const getValue = (e) => {
     pagePer: 40,
   }
 
-  return optionUrl;
-};
+// const getValue = (e) => {
+//    optionUrl = {
+//     key: '28460134-7b12f16a69bff4fc5524ed994',
+//     findTermin: searchInput.value.trim(),
+//     imgType: 'photo',
+//     orientation: 'horisontal',
+//     ageFilterDate: true,
+//     pagePer: 40,
+//   }
+
+//   return optionUrl;
+// };
 
 const moveScrolle = () => {  
         const d = document.documentElement.getBoundingClientRect();
