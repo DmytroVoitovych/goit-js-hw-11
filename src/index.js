@@ -50,7 +50,7 @@ form.addEventListener('submit', async (e) => {
     page = 1;
  if (gallery.children.length < 40) {
         await getUser();
-     await Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+    //  await Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
      
       } 
 });
