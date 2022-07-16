@@ -34,10 +34,23 @@ body {
 .gallery{
   display: grid;
     column-gap: 15px;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    @media screen and (min-width: 426px) {
+     grid-template-columns: repeat(auto-fit, minmax(396px, 1fr));
+    }
     padding: 0 15px;
     margin-top: 20px;
+   
   }
+.gallery{
+@media screen and (max-width: 425.5px) {
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+& .info-item{
+  margin: 8px 0;
+}
+}
+}
+    
 
 img {
   display: block;
