@@ -37,9 +37,9 @@ export const moveScrolle = throttle(() => {
   
 
 form.addEventListener('submit',  async (e) => {
-    
-    e.preventDefault();
-    gallery.innerHTML = '';
+  e.preventDefault();
+  document.querySelector('[name="searchQuery"]').value = " ";
+  gallery.innerHTML = '';
   page = 1;
   await getUser();    
   if (gallery.children.length == 0) {
