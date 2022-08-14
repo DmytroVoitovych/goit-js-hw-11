@@ -1,12 +1,17 @@
 import { response } from './js/fetch';
 import { getUser } from './js/fetch';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
+
 var throttle = require('lodash.throttle');
 
 let page = 1;
 
+
 const form = document.querySelector('#search-form');
 const gallery = document.querySelector(".gallery");
+
+
 
 export const moveScrolle = throttle(() => {
   if (gallery.children.length != 0) {
@@ -24,6 +29,7 @@ export const moveScrolle = throttle(() => {
         else {
           page+=1;
           getUser();
+          
           seeLastElement.unobserve(currentEntry);
         }
       });
@@ -38,13 +44,22 @@ export const moveScrolle = throttle(() => {
 
 form.addEventListener('submit',  async (e) => {
   e.preventDefault();
-  document.querySelector('[name="searchQuery"]').value = " ";
-  gallery.innerHTML = '';
+  gallery.innerHTML = ' ';
   page = 1;
-  await getUser();    
-  if (gallery.children.length == 0) {
-         await  Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-        }
+  const target = e.target.elements.searchQuery.value.trim();
+
+  if ( target !== "") {
+    
+    e.target.reset();
+    await getUser();
+     
+    if (gallery.children.length <= 0) {
+      await Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+    }
+  }
+  else {
+    await Notify.failure('The field must be filled in!');
+  }
 });
 
 export { page };
