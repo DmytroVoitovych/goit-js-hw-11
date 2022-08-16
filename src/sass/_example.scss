@@ -57,22 +57,7 @@ body {
       border: 4px solid rgb(255 255 255 / 0.5);
       border-radius: 22px ;
       overflow: hidden;
-    // position: relative;
-      // width: 100%;
-      //   height: 100%;
-        // background-color: #141414;
-        // z-index: 1;
-
-      // &::after {
-      //     content: '';
-      //     position: absolute;
-      //     top: 0;
-      //     width: 100%;
-      //     height: 100%;
-      //     background-color: #141414;
-      //     z-index: 1;
-      
-      //   }
+    
       
 }
 
@@ -122,5 +107,67 @@ a {
   text-align: center;
   padding: 20px 0;
   background-color: #4169e1;
+
+}
+
+.base  {
+  border: none;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 250ms cubic-bezier(0.075, 0.82, 0.165, 1), opacity 250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.up{
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 70px;
+  right: 70px;
+  opacity: 1;
+  visibility:visible;
+  
+  svg{
+    width: 60px;
+    height: 60px;
+    
+    fill: rgba(11, 25, 179, 0.5);
+    stroke: #4169e1;
+    
+   transition: stroke 250ms; 
+  }
+
+ &:hover svg{
+  stroke: transparent;
+ }
+  
+}
+
+.down {
+    opacity: 1;
+      visibility: visible;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  top: 70px;
+  right: 70px;
+  transform: rotate(180deg);
+  svg {
+    width: 60px;
+    height: 60px;
+
+    fill: rgba(11, 25, 179, 0.5);
+    stroke: #4169e1;
+    fill-rule: evenodd;
+    transition: stroke 250ms;
+  }
+
+  &:hover svg {
+    stroke: transparent;
+  }
 
 }
